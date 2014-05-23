@@ -12,5 +12,7 @@ module JPushApiRubyClient
     ALIAS = '3'
     # 广播
     BROADCAST = '4'
+    # RegistrationID
+    REGISTRATIONID = '5'
   end
 end

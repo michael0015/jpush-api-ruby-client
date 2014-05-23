@@ -99,6 +99,21 @@ module JPushApiRubyClient
     end
 
 =begin
+    * 发送带RegistrationID 推送的自定义信息
+    * @param [Integer] send_no
+    * @param [String] RegistrationID
+    * @param [String] msg_title
+    * @param [String] msg_content
+    * @param [Hash] opts opts参数可包含 builder_id、extras、override_msg_id
+    * @return [Hash] sendno、msg_id、errcode、errmsg
+=end
+    def send_message_with_registrationid(send_no, registration_id, msg_title, msg_content, opts = {})
+      receiver = {:receiver_type => ReceiverType::REGISTRATIONID,
+                  :receiver_value => registration_id}
+      send_custom_message(send_no, msg_title, msg_content, receiver, opts)
+    end
+
+=begin
     * 发送使用 appkey 推送的通知
     * @param [Integer] send_no
     * @param [String] msg_title
@@ -154,6 +169,21 @@ module JPushApiRubyClient
     def send_notification_with_imei(send_no, imei, msg_title, msg_content, opts = {})
       receiver = {:receiver_type => ReceiverType::IMEI,
                   :receiver_value => imei}
+      send_notification(send_no, msg_title, msg_content, receiver, opts)
+    end
+
+=begin
+    * 发送带RegistrationID推送的通知
+    * @param [Integer] send_no
+    * @param [String] RegistrationID
+    * @param [String] msg_title
+    * @param [String] msg_content
+    * @param [Hash] opts opts参数可包含 builder_id、extras、override_msg_id
+    * @return [Hash] sendno、msg_id、errcode、errmsg
+=end
+    def send_notification_with_registrationid(send_no, registration_id, msg_title, msg_content, opts = {})
+      receiver = {:receiver_type => ReceiverType::REGISTRATIONID,
+                  :receiver_value => registration_id}
       send_notification(send_no, msg_title, msg_content, receiver, opts)
     end
 
